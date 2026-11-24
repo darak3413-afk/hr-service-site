@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Кадровая служба организации | ЭОР по управлению персоналом</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* Новая сбалансированная палитра */
+    --bg-main:#F7F4EE;           /* Основной фон: светлый песочный */
+    --bg-alt:#EBE6DC;            /* Альтернативный фон: чуть темнее песочного */
+    --card-bg:#FFFFFF;           /* Белые карточки для контраста */
+    
+    --primary:#3A4D3A;           /* Темно-оливковый (основной акцент) */
+    --primary-dark:#1E2B1E;      /* Глубокий темно-зеленый */
+    --secondary:#2A4258;         /* Темно-синий (для контраста) */
+    --accent:#B07D4C;            /* Коричневый/медный (теплый акцент) */
+    --sand:#D9C5A8;              /* Песочный для фонов элементов */
+    
+    --text:#2C3A30;              /* Темный текст */
+    --muted:#6B7B6E;             /* Приглушенный текст */
+    --border:#D8D1C5;            /* Границы */
+    --shadow:0 8px 30px rgba(58,77,58,.08);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--bg-main);
+    color:var(--text);
+    line-height:1.7;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4{font-family:'Montserrat',sans-serif;line-height:1.25;color:var(--primary-dark);}
+  .container{max-width:1100px;margin:0 auto;padding:0 24px;}
+
+  /* ===== HERO ===== */
+  .hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    position:relative;
+    background:linear-gradient(135deg, #2A4258 0%, #1E2B1E 100%);
+    color:#fff;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;
+    width:600px;height:600px;
+    background:radial-gradient(circle,rgba(217,197,168,.15),transparent 70%);
+    top:-150px;right:-150px;
+    border-radius:50%;
+    animation:float 8s ease-in-out infinite;
+  }
+  .hero::after{
+    content:"";
+    position:absolute;
+    width:500px;height:500px;
+    background:radial-gradient(circle,rgba(176,125,76,.15),transparent 70%);
+    bottom:-150px;left:-100px;
+    border-radius:50%;
+    animation:float 10s ease-in-out infinite reverse;
+  }
+  @keyframes float{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-30px);}
+  }
+  .hero-content{position:relative;z-index:2;padding:40px 24px;max-width:900px;}
+  .hero-badge{
+    display:inline-block;
+    padding:8px 18px;
+    background:rgba(255,255,255,.1);
+    border:1px solid rgba(217,197,168,.3);
+    color:var(--sand);
+    border-radius:50px;
+    font-size:13px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    margin-bottom:24px;
+    backdrop-filter:blur(10px);
+  }
+  .hero h1{
+    font-size:clamp(32px,5vw,58px);
+    font-weight:800;
+    margin-bottom:18px;
+    color:#fff;
+    text-shadow:0 4px 20px rgba(0,0,0,.3);
+  }
+  .hero h1 span{color:var(--sand);}
+  .hero p.sub{
+    font-size:clamp(16px,2vw,20px);
+    opacity:.9;
+    margin-bottom:36px;
+    font-weight:300;
+    color:#E2E8F0;
+  }
+  .hero-author{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:16px;
+    margin-bottom:40px;
+  }
+  .author-card{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.15);
+    padding:14px 24px;
+    border-radius:14px;
+    backdrop-filter:blur(10px);
+    font-size:14px;
+    color:#E2E8F0;
+  }
+  .author-card b{display:block;font-size:16px;color:var(--sand);margin-bottom:2px;}
+  .btn{
+    display:inline-block;
+    padding:16px 40px;
+    background:var(--accent);
+    color:#fff;
+    font-weight:700;
+    font-family:'Montserrat',sans-serif;
+    border-radius:50px;
+    text-decoration:none;
+    transition:.3s;
+    box-shadow:0 10px 30px rgba(176,125,76,.3);
+  }
+  .btn:hover{transform:translateY(-3px);box-shadow:0 15px 40px rgba(176,125,76,.5);}
+
+  /* ===== SECTIONS ===== */
+  section{padding:80px 0;position:relative;}
+  
+  /* Чередование фонов */
+  .bg-alt{background:var(--bg-alt);}
+  .bg-sand{background:#F0EAE1;}
+
+  .section-title{
+    font-size:clamp(26px,3.5vw,40px);
+    font-weight:800;
+    margin-bottom:14px;
+    position:relative;
+    display:inline-block;
+    color:var(--primary-dark);
+  }
+  .section-title::after{
+    content:"";
+    display:block;
+    width:70px;height:5px;
+    background:var(--accent);
+    border-radius:3px;
+    margin-top:14px;
+  }
+  .section-intro{color:var(--muted);font-size:17px;max-width:750px;margin-bottom:48px;}
+
+  /* ===== INTRO ===== */
+  .intro-box{
+    background:var(--card-bg);
+    border-radius:24px;
+    padding:48px;
+    box-shadow:var(--shadow);
+    border-left:6px solid var(--primary);
+  }
+  .intro-box p{margin-bottom:16px;font-size:17px;}
+  .intro-box p:last-child{margin-bottom:0;}
+
+  /* ===== TIMELINE ===== */
+  .timeline{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:24px;
+    position:relative;
+  }
+  .timeline-item{
+    background:var(--card-bg);
+    border-radius:20px;
+    padding:32px 24px;
+    box-shadow:var(--shadow);
+    text-align:center;
+    transition:.35s;
+    position:relative;
+    overflow:hidden;
+    border-top:4px solid var(--primary);
+  }
+  .timeline-item:nth-child(2){border-top-color:var(--secondary);}
+  .timeline-item:nth-child(3){border-top-color:var(--accent);}
+  .timeline-item:hover{transform:translateY(-8px);box-shadow:0 18px 45px rgba(58,77,58,.15);}
+  .timeline-num{
+    font-family:'Montserrat',sans-serif;
+    font-size:44px;
+    font-weight:800;
+    color:var(--sand);
+    line-height:1;
+    margin-bottom:12px;
+  }
+  .timeline-item h4{font-size:20px;margin-bottom:6px;}
+  .timeline-item .period{color:var(--accent);font-weight:600;font-size:14px;margin-bottom:12px;display:block;}
+  .timeline-item p{font-size:15px;color:var(--muted);}
+
+  /* ===== TASK CARDS ===== */
+  .cards-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:24px;
+  }
+  .task-card{
+    background:var(--card-bg);
+    border-radius:20px;
+    padding:32px 28px;
+    box-shadow:var(--shadow);
+    transition:.35s;
+    border-top:4px solid var(--primary);
+  }
+  .task-card:nth-child(2){border-top-color:var(--accent);}
+  .task-card:nth-child(3){border-top-color:var(--secondary);}
+  .task-card:nth-child(4){border-top-color:var(--primary);}
+  .task-card:nth-child(5){border-top-color:var(--accent);}
+  .task-card:nth-child(6){border-top-color:var(--secondary);}
+  .task-card:hover{transform:translateY(-6px);box-shadow:0 18px 45px rgba(58,77,58,.15);}
+  .task-icon{
+    width:56px;height:56px;
+    border-radius:16px;
+    background:var(--bg-main);
+    display:flex;align-items:center;justify-content:center;
+    font-size:26px;
+    margin-bottom:18px;
+    border:1px solid var(--border);
+  }
+  .task-card h4{font-size:19px;margin-bottom:10px;}
+  .task-card p{font-size:15px;color:var(--muted);}
+
+  /* ===== FUNCTIONS (ACCORDION) ===== */
+  .accordion{max-width:900px;margin:0 auto;}
+  .acc-item{
+    background:var(--card-bg);
+    border-radius:16px;
+    margin-bottom:16px;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+    transition:.3s;
+    border:1px solid var(--border);
+  }
+  .acc-header{
+    padding:24px 28px;
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-family:'Montserrat',sans-serif;
+    font-weight:700;
+    font-size:17px;
+    color:var(--primary-dark);
+    user-select:none;
+    transition:.3s;
+  }
+  .acc-header:hover{background:var(--bg-main);}
+  .acc-header .num{
+    display:inline-flex;
+    align-items:center;justify-content:center;
+    width:36px;height:36px;
+    border-radius:10px;
+    background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+    color:#fff;
+    font-size:15px;
+    margin-right:16px;
+    flex-shrink:0;
+  }
+  .acc-header .title-wrap{display:flex;align-items:center;flex:1;}
+  .acc-header .arrow{
+    font-size:22px;
+    color:var(--accent);
+    transition:.3s;
+    flex-shrink:0;
+    margin-left:12px;
+  }
+  .acc-item.active .acc-header .arrow{transform:rotate(180deg);}
+  .acc-body{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .4s ease;
+  }
+  .acc-body-inner{padding:0 28px 28px 80px;}
+  .acc-body-inner ul{list-style:none;}
+  .acc-body-inner li{
+    padding:10px 0 10px 28px;
+    position:relative;
+    font-size:15px;
+    color:var(--text);
+    border-bottom:1px dashed var(--border);
+  }
+  .acc-body-inner li:last-child{border-bottom:none;}
+  .acc-body-inner li::before{
+    content:"✓";
+    position:absolute;
+    left:0;
+    color:var(--primary);
+    font-weight:700;
+  }
+  .acc-body-inner .schema{
+    margin-top:18px;
+    padding:18px;
+    background:var(--bg-main);
+    border-radius:12px;
+    font-size:14px;
+    color:var(--primary-dark);
+    font-weight:600;
+    text-align:center;
+    line-height:1.8;
+    border:1px solid var(--border);
+  }
+
+  /* ===== TABLE ===== */
+  .table-wrap{
+    overflow-x:auto;
+    border-radius:20px;
+    box-shadow:var(--shadow);
+    background:var(--card-bg);
+    border:1px solid var(--border);
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:600px;
+  }
+  thead{
+    background:linear-gradient(135deg,var(--primary-dark),var(--primary));
+    color:#fff;
+  }
+  th{
+    padding:18px 20px;
+    text-align:left;
+    font-family:'Montserrat',sans-serif;
+    font-weight:600;
+    font-size:14px;
+    letter-spacing:.3px;
+  }
+  td{
+    padding:16px 20px;
+    font-size:15px;
+    border-bottom:1px solid var(--border);
+    vertical-align:top;
+  }
+  tbody tr{transition:.2s;}
+  tbody tr:hover{background:var(--bg-main);}
+  tbody tr:last-child td{border-bottom:none;}
+
+  /* ===== ORG STRUCTURE ===== */
+  .org-wrap{
+    background:var(--card-bg);
+    border-radius:24px;
+    padding:48px 24px;
+    box-shadow:var(--shadow);
+    text-align:center;
+    border:1px solid var(--border);
+  }
+  .org-top{
+    display:inline-block;
+    padding:16px 36px;
+    background:linear-gradient(135deg,var(--secondary),#1d3142);
+    color:#fff;
+    border-radius:14px;
+    font-family:'Montserrat',sans-serif;
+    font-weight:700;
+    font-size:16px;
+    margin-bottom:8px;
+  }
+  .org-line{width:2px;height:30px;background:var(--primary);margin:0 auto;}
+  .org-branch{
+    display:inline-block;
+    padding:14px 32px;
+    background:var(--accent);
+    color:#fff;
+    border-radius:14px;
+    font-family:'Montserrat',sans-serif;
+    font-weight:700;
+    font-size:15px;
+    margin:8px 0;
+  }
+  .org-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+    margin-top:8px;
+  }
+  .org-box{
+    padding:18px 12px;
+    background:var(--bg-main);
+    border-radius:12px;
+    font-size:14px;
+    font-weight:600;
+    color:var(--primary-dark);
+    border:1px solid var(--border);
+    transition:.3s;
+  }
+  .org-box:hover{background:var(--sand);transform:translateY(-3px);}
+  .org-note{margin-top:32px;color:var(--muted);font-size:15px;max-width:700px;margin-left:auto;margin-right:auto;}
+
+  /* ===== QUIZ ===== */
+  .quiz-wrap{
+    background:linear-gradient(135deg,var(--secondary),var(--primary-dark));
+    border-radius:28px;
+    padding:56px 40px;
+    color:#fff;
+    box-shadow:0 20px 60px rgba(42,66,88,.25);
+  }
+  .quiz-wrap h3{font-size:28px;margin-bottom:8px;color:var(--sand);}
+  .quiz-wrap .quiz-sub{opacity:.85;margin-bottom:36px;}
+  .quiz-q{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:18px;
+    padding:26px;
+    margin-bottom:20px;
+  }
+  .quiz-q .q-text{font-weight:600;font-size:17px;margin-bottom:18px;color:#fff;}
+  .quiz-option{
+    display:flex;
+    align-items:center;
+    padding:14px 18px;
+    border-radius:12px;
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.08);
+    margin-bottom:10px;
+    cursor:pointer;
+    transition:.25s;
+    font-size:15px;
+  }
+  .quiz-option:hover{background:rgba(255,255,255,.1);}
+  .quiz-option.selected{background:var(--sand);color:var(--primary-dark);font-weight:600;border-color:var(--sand);}
+  .quiz-option.correct{background:#4A6B4A;border-color:#4A6B4A;color:#fff;}
+  .quiz-option.wrong{background:#9B3D3D;border-color:#9B3D3D;color:#fff;}
+  .quiz-option .marker{
+    width:26px;height:26px;
+    border-radius:50%;
+    border:2px solid rgba(255,255,255,.3);
+    display:flex;align-items:center;justify-content:center;
+    margin-right:14px;
+    font-size:13px;
+    font-weight:700;
+    flex-shrink:0;
+  }
+  .quiz-option.selected .marker{background:var(--primary-dark);color:#fff;border-color:var(--primary-dark);}
+  .quiz-btn{
+    padding:16px 44px;
+    background:var(--sand);
+    color:var(--primary-dark);
+    border:none;
+    border-radius:50px;
+    font-family:'Montserrat',sans-serif;
+    font-weight:700;
+    font-size:16px;
+    cursor:pointer;
+    transition:.3s;
+    margin-top:12px;
+  }
+  .quiz-btn:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(217,197,168,.3);}
+  .quiz-result{
+    margin-top:24px;
+    padding:24px;
+    background:rgba(255,255,255,.1);
+    border-radius:16px;
+    font-size:18px;
+    font-weight:600;
+    text-align:center;
+    display:none;
+  }
+  .quiz-result.show{display:block;animation:fadeIn .4s;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+
+  /* ===== CHECKLIST ===== */
+  .checklist{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:16px;
+  }
+  .check-item{
+    display:flex;
+    align-items:center;
+    padding:20px 24px;
+    background:var(--card-bg);
+    border-radius:16px;
+    box-shadow:var(--shadow);
+    cursor:pointer;
+    transition:.3s;
+    user-select:none;
+    border:2px solid transparent;
+  }
+  .check-item:hover{transform:translateY(-3px);}
+  .check-item.checked{border-color:var(--primary);background:var(--bg-main);}
+  .check-box{
+    width:26px;height:26px;
+    border-radius:8px;
+    border:2px solid var(--primary);
+    margin-right:16px;
+    flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;
+    font-size:14px;
+    font-weight:700;
+    transition:.25s;
+  }
+  .check-item.checked .check-box{background:var(--primary);border-color:var(--primary);}
+  .check-item span{font-size:15px;font-weight:500;color:var(--text);}
+
+  /* ===== CONCLUSIONS ===== */
+  .conclusions{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:20px;
+    counter-reset:concl;
+  }
+  .concl-item{
+    background:var(--card-bg);
+    border-radius:18px;
+    padding:28px 24px;
+    box-shadow:var(--shadow);
+    position:relative;
+    padding-left:72px;
+    transition:.3s;
+    border:1px solid var(--border);
+  }
+  .concl-item:hover{transform:translateY(-5px);}
+  .concl-item::before{
+    counter-increment:concl;
+    content:counter(concl);
+    position:absolute;
+    left:24px;top:26px;
+    width:36px;height:36px;
+    background:linear-gradient(135deg,var(--accent),#8A5A30);
+    color:#fff;
+    border-radius:10px;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Montserrat',sans-serif;
+    font-weight:800;
+    font-size:16px;
+  }
+  .concl-item p{font-size:15px;}
+
+  /* ===== SOURCES ===== */
+  .sources{
+    background:var(--card-bg);
+    border-radius:24px;
+    padding:48px;
+    box-shadow:var(--shadow);
+    border:1px solid var(--border);
+  }
+  .sources ol{list-style:none;counter-reset:src;}
+  .sources li{
+    counter-increment:src;
+    padding:16px 0 16px 52px;
+    position:relative;
+    border-bottom:1px solid var(--border);
+    font-size:15px;
+    color:var(--text);
+  }
+  .sources li:last-child{border-bottom:none;}
+  .sources li::before{
+    content:counter(src);
+    position:absolute;
+    left:0;top:16px;
+    width:32px;height:32px;
+    background:var(--bg-main);
+    color:var(--primary);
+    border-radius:8px;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700;
+    font-size:14px;
+    font-family:'Montserrat',sans-serif;
+    border:1px solid var(--border);
+  }
+
+  /* ===== FOOTER ===== */
+  footer{
+    background:var(--primary-dark);
+    color:rgba(255,255,255,.8);
+    text-align:center;
+    padding:40px 24px;
+    font-size:15px;
+    border-top:4px solid var(--accent);
+  }
+  footer b{color:var(--sand); font-size: 16px;}
+
+  /* ===== ANIMATIONS ON SCROLL ===== */
+  .reveal{
+    opacity:0;
+    transform:translateY(40px);
+    transition:opacity .7s ease, transform .7s ease;
+  }
+  .reveal.visible{opacity:1;transform:translateY(0);}
+
+  /* ===== RESPONSIVE ===== */
+  @media(max-width:900px){
+    .timeline{grid-template-columns:1fr;}
+    .org-grid{grid-template-columns:repeat(2,1fr);}
+    .quiz-wrap{padding:40px 24px;}
+    .intro-box,.sources{padding:32px 24px;}
+    .acc-body-inner{padding-left:28px;}
+  }
+  @media(max-width:600px){
+    section{padding:56px 0;}
+    .org-grid{grid-template-columns:1fr;}
+    .hero-author{flex-direction:column;align-items:center;}
+    .acc-header{font-size:15px;padding:20px;}
+    .acc-header .num{margin-right:10px;}
+    .acc-body-inner{padding:0 20px 24px 20px;}
+    th,td{padding:12px 14px;font-size:14px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+  <div class="hero-content">
+    <span class="hero-badge">Электронный образовательный ресурс</span>
+    <h1>Кадровая служба <span>организации</span></h1>
+    <p class="sub">Задачи, функции и профессиональный состав кадровых служб</p>
+    <div class="hero-author">
+      <div class="author-card">
+        <b>Автор</b>
+        Кузнецова Дарья Михайловна
+      </div>
+      <div class="author-card">
+        <b>Группа</b>
+        М-31
+      </div>
+      <div class="author-card">
+        <b>Дисциплина</b>
+        Управление персоналом
+      </div>
+    </div>
+    <a href="#intro" class="btn">Начать изучение ↓</a>
+  </div>
+</header>
+
+<!-- ===== INTRO ===== -->
+<section id="intro">
+  <div class="container">
+    <h2 class="section-title reveal">Введение</h2>
+    <div class="intro-box reveal">
+      <p>Кадровая служба — это не просто «отдел кадров», который оформляет документы. Сегодня это <strong>стратегический партнёр руководства</strong>, который отвечает за главный ресурс организации — людей. От того, насколько эффективно работает кадровая служба, зависит подбор сильных специалистов, их развитие, мотивация и, в конечном счёте, конкурентоспособность компании.</p>
+      <p>В этом лонгриде разберём: какие задачи решает кадровая служба, какие функции выполняет, из каких специалистов состоит и какие требования предъявляются к современным HR-профессионалам.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TIMELINE ===== -->
+<section class="bg-alt">
+  <div class="container">
+    <h2 class="section-title reveal">Эволюция кадровой службы</h2>
+    <p class="section-intro reveal">От учётного отдела до стратегического HR-партнёра — три этапа развития.</p>
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <div class="timeline-num">01</div>
+        <h4>Отдел кадров</h4>
+        <span class="period">XX век</span>
+        <p>Учёт, оформление документов, кадровое делопроизводство. Фокус — на соблюдении формальностей.</p>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-num">02</div>
+        <h4>Отдел управления персоналом</h4>
+        <span class="period">1990-е — 2000-е</span>
+        <p>Подбор, обучение, мотивация. Появляется понимание, что люди — источник развития бизнеса.</p>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-num">03</div>
+        <h4>HR-служба</h4>
+        <span class="period">2010-е — н.в.</span>
+        <p>Стратегия, аналитика, бизнес-партнёрство. HR влияет на ключевые решения компании.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TASKS ===== -->
+<section>
+  <div class="container">
+    <h2 class="section-title reveal">Задачи кадровой службы</h2>
+    <p class="section-intro reveal">Шесть ключевых направлений, которые обеспечивают стабильную работу организации.</p>
+    <div class="cards-grid">
+      <div class="task-card reveal">
+        <div class="task-icon">🎯</div>
+        <h4>Обеспечение кадрами</h4>
+        <p>Подбор квалифицированных сотрудников под задачи бизнеса, закрытие вакансий в срок.</p>
+      </div>
+      <div class="task-card reveal">
+        <div class="task-icon">📈</div>
+        <h4>Развитие персонала</h4>
+        <p>Обучение, повышение квалификации, планирование карьеры и формирование кадрового резерва.</p>
+      </div>
+      <div class="task-card reveal">
+        <div class="task-icon">💡</div>
+        <h4>Мотивация и стимулирование</h4>
+        <p>Системы оплаты труда, льготы, нематериальная мотивация, вовлечённость сотрудников.</p>
+      </div>
+      <div class="task-card reveal">
+        <div class="task-icon">⚖️</div>
+        <h4>Соблюдение законодательства</h4>
+        <p>Трудовое право, охрана труда, кадровый учёт без нарушений и штрафов.</p>
+      </div>
+      <div class="task-card reveal">
+        <div class="task-icon">🤝</div>
+        <h4>Корпоративная культура</h4>
+        <p>Ценности, климат в коллективе, внутренние коммуникации и тимбилдинг.</p>
+      </div>
+      <div class="task-card reveal">
+        <div class="task-icon">📋</div>
+        <h4>Кадровое делопроизводство</h4>
+        <p>Приём, перевод, увольнение, личные дела, отчётность в контролирующие органы.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FUNCTIONS ===== -->
+<section class="bg-sand">
+  <div class="container">
+    <h2 class="section-title reveal">Функции кадровой службы</h2>
+    <p class="section-intro reveal">Раскрой каждый блок, чтобы увидеть подробности и схемы.</p>
+    <div class="accordion">
+
+      <div class="acc-item reveal">
+        <div class="acc-header">
+          <div class="title-wrap"><span class="num">1</span> Планирование и подбор персонала</div>
+          <span class="arrow">▾</span>
+        </div>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            <ul>
+              <li>Анализ качественной и количественной потребности в кадрах</li>
+              <li>Поиск кандидатов: внутренние и внешние источники</li>
+              <li>Отбор: собеседования, тестирование, assessment-центр</li>
+              <li>Оформление найма и вывод на работу</li>
+            </ul>
+            <div class="schema">Потребность → Поиск → Отбор → Найм</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="acc-item reveal">
+        <div class="acc-header">
+          <div class="title-wrap"><span class="num">2</span> Адаптация и обучение</div>
+          <span class="arrow">▾</span>
+        </div>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            <ul>
+              <li>Onboarding новых сотрудников: от знакомства до самостоятельной работы</li>
+              <li>Наставничество и коучинг</li>
+              <li>Корпоративные учебные центры и тренинги</li>
+              <li>Оценка потребности в обучении</li>
+            </ul>
+            <div class="schema">Адаптация → Обучение → Развитие</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="acc-item reveal">
+        <div class="acc-header">
+          <div class="title-wrap"><span class="num">3</span> Оценка и аттестация персонала</div>
+          <span class="arrow">▾</span>
+        </div>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            <ul>
+              <li>Performance review и KPI</li>
+              <li>Аттестация на соответствие должности</li>
+              <li>Оценка компетенций и метод 360°</li>
+              <li>Формирование обратной связи и планов развития</li>
+            </ul>
+            <div class="schema">Оценка → Обратная связь → План развития</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="acc-item reveal">
+        <div class="acc-header">
+          <div class="title-wrap"><span class="num">4</span> Мотивация и оплата труда</div>
+          <span class="arrow">▾</span>
+        </div>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            <ul>
+              <li>Системы оплаты: оклад, премии, бонусы</li>
+              <li>Соцпакет и льготы</li>
+              <li>Нематериальная мотивация: признание, развитие, гибкость</li>
+              <li>Бенчмаркинг зарплат на рынке труда</li>
+            </ul>
+            <div class="schema">Материальная + Нематериальная мотивация = Вовлечённость</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="acc-item reveal">
+        <div class="acc-header">
+          <div class="title-wrap"><span class="num">5</span> Кадровое делопроизводство</div>
+          <span class="arrow">▾</span>
+        </div>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            <ul>
+              <li>Приём, перевод, увольнение сотрудников</li>
+              <li>Трудовые книжки, личные дела, график отпусков</li>
+              <li>Отчётность в контролирующие органы</li>
+              <li>Соблюдение требований ТК РФ</li>
+            </ul>
+            <div class="schema">Документы → Учёт → Отчётность</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="acc-item reveal">
+        <div class="acc-header">
+          <div class="title-wrap"><span class="num">6</span> Социальная политика и корпоративная культура</div>
+          <span class="arrow">▾</span>
+        </div>
+        <div class="acc-body">
+          <div class="acc-body-inner">
+            <ul>
+              <li>Социальные программы и поддержка сотрудников</li>
+              <li>Тимбилдинг и корпоративные мероприятия</li>
+              <li>Внутренние коммуникации и ценности</li>
+              <li>Формирование вовлечённости и лояльности</li>
+            </ul>
+            <div class="schema">Ценности → Климат → Лояльность</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== EVALUATION METHODS TABLE ===== -->
+<section>
+  <div class="container">
+    <h2 class="section-title reveal">Методы оценки персонала</h2>
+    <p class="section-intro reveal">Сравним основные подходы, которые использует кадровая служба.</p>
+    <div class="table-wrap reveal">
+      <table>
+        <thead>
+          <tr>
+            <th>Метод</th>
+            <th>Что оценивает</th>
+            <th>Плюсы</th>
+            <th>Минусы</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Аттестация</strong></td>
+            <td>Соответствие должности</td>
+            <td>Системность, юридическая значимость</td>
+            <td>Субъективность, стресс для сотрудников</td>
+          </tr>
+          <tr>
+            <td><strong>KPI</strong></td>
+            <td>Результаты работы</td>
+            <td>Измеримость, прозрачность</td>
+            <td>Не все задачи измеримы</td>
+          </tr>
+          <tr>
+            <td><strong>Assessment center</strong></td>
+            <td>Компетенции</td>
+            <td>Комплексность, объективность</td>
+            <td>Дорого, требует экспертов</td>
+          </tr>
+          <tr>
+            <td><strong>360°</strong></td>
+            <td>Мнение окружения</td>
+            <td>Многосторонняя обратная связь</td>
+            <td>Возможны конфликты интересов</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ORG STRUCTURE ===== -->
+<section class="bg-alt">
+  <div class="container">
+    <h2 class="section-title reveal">Место кадровой службы в структуре организации</h2>
+    <p class="section-intro reveal">Типовая схема подчинения и подразделений HR-службы.</p>
+    <div class="org-wrap reveal">
+      <div class="org-top">Генеральный директор</div>
+      <div class="org-line"></div>
+      <div class="org-branch">HR-директор</div>
+      <div class="org-line"></div>
+      <div class="org-grid">
+        <div class="org-box">Подбор<br>(рекрутинг)</div>
+        <div class="org-box">Обучение<br>и развитие</div>
+        <div class="org-box">Мотивация<br>и оплата</div>
+        <div class="org-box">Кадровый<br>учёт</div>
+      </div>
+      <p class="org-note">В зависимости от размера компании HR-служба может быть отдельным департаментом или представлена одним специалистом. Варианты структуры: линейная, функциональная, матричная.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROFESSIONAL STAFF ===== -->
+<section>
+  <div class="container">
+    <h2 class="section-title reveal">Профессиональный состав кадровых служб</h2>
+    <p class="section-intro reveal">Кто работает в современной HR-службе и какие требования к ним предъявляются.</p>
+    <div class="table-wrap reveal">
+      <table>
+        <thead>
+          <tr>
+            <th>Должность</th>
+            <th>Задачи</th>
+            <th>Требования</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>HR-директор</strong></td>
+            <td>Стратегия управления персоналом, руководство HR-службой</td>
+            <td>Высшее образование, опыт 5+ лет, стратегическое мышление</td>
+          </tr>
+          <tr>
+            <td><strong>HR-менеджер (HRBP)</strong></td>
+            <td>Партнёрство с бизнесом, решение кадровых задач</td>
+            <td>Знание HR-процессов, коммуникабельность</td>
+          </tr>
+          <tr>
+            <td><strong>Рекрутер</strong></td>
+            <td>Поиск и отбор кандидатов</td>
+            <td>Знание рынка, навыки собеседования</td>
+          </tr>
+          <tr>
+            <td><strong>Специалист по обучению (L&D)</strong></td>
+            <td>Развитие компетенций, тренинги</td>
+            <td>Педагогические навыки, знание методов обучения</td>
+          </tr>
+          <tr>
+            <td><strong>Специалист по C&B</strong></td>
+            <td>Оплата труда, льготы, бенчмаркинг</td>
+            <td>Аналитика, знание рынка труда</td>
+          </tr>
+          <tr>
+            <td><strong>Кадровый делопроизводитель</strong></td>
+            <td>Документы, учёт, отчётность</td>
+            <td>Знание ТК РФ, внимательность</td>
+          </tr>
+          <tr>
+            <td><strong>HR-аналитик</strong></td>
+            <td>Аналитика данных, метрики</td>
+            <td>Excel/SQL, аналитическое мышление</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===== QUIZ ===== -->
+<section class="bg-sand">
+  <div class="container">
+    <h2 class="section-title reveal">Проверь себя</h2>
+    <p class="section-intro reveal">Пройди небольшой тест по теме — 5 вопросов с автопроверкой.</p>
+    <div class="quiz-wrap reveal" id="quiz">
+      <h3>Тест: Кадровая служба</h3>
+      <p class="quiz-sub">Выбери один вариант ответа в каждом вопросе и нажми «Проверить».</p>
+      <div id="quiz-questions"></div>
+      <button class="quiz-btn" onclick="checkQuiz()">Проверить результаты</button>
+      <div class="quiz-result" id="quiz-result"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CHECKLIST ===== -->
+<section>
+  <div class="container">
+    <h2 class="section-title reveal">Чек-лист: эффективная кадровая служба</h2>
+    <p class="section-intro reveal">Отметь пункты, которые уже внедрены в компании (или которые ты считаешь важными).</p>
+    <div class="checklist" id="checklist">
+      <div class="check-item"><div class="check-box"></div><span>Есть стратегия управления персоналом</span></div>
+      <div class="check-item"><div class="check-box"></div><span>Внедрён onboarding новых сотрудников</span></div>
+      <div class="check-item"><div class="check-box"></div><span>Проводится регулярная оценка персонала</span></div>
+      <div class="check-item"><div class="check-box"></div><span>Есть система мотивации и льгот</span></div>
+      <div class="check-item"><div class="check-box"></div><span>Ведётся кадровый учёт без ошибок</span></div>
+      <div class="check-item"><div class="check-box"></div><span>Развивается корпоративная культура</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONCLUSIONS ===== -->
+<section class="bg-alt">
+  <div class="container">
+    <h2 class="section-title reveal">Выводы</h2>
+    <p class="section-intro reveal">Главное, что стоит запомнить по теме.</p>
+    <div class="conclusions">
+      <div class="concl-item reveal"><p>Кадровая служба — стратегический партнёр бизнеса, а не только «учётчики».</p></div>
+      <div class="concl-item reveal"><p>Её задачи охватывают весь жизненный цикл сотрудника: от подбора до увольнения.</p></div>
+      <div class="concl-item reveal"><p>Функции многогранны: планирование, подбор, адаптация, обучение, оценка, мотивация, учёт.</p></div>
+      <div class="concl-item reveal"><p>Профессиональный состав включает разных специалистов — от рекрутера до HR-аналитика.</p></div>
+      <div class="concl-item reveal"><p>Современные тренды — цифровизация, аналитика, HR как бизнес-партнёр.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SOURCES ===== -->
+<section>
+  <div class="container">
+    <h2 class="section-title reveal">Использованные источники</h2>
+    <div class="sources reveal" style="margin-top: 32px;">
+      <ol>
+        <li>Анисимов А.Ю., Пятаева О.А., Грабская Е.П. Управление персоналом организации: учебник для вузов. — М.: Юрайт, 2025. — 278 с. — URL: https://urait.ru/bcode/567776</li>
+        <li>Анисимов А.Ю., Пятаева О.А., Грабская Е.П. Управление персоналом организации: учебник для СПО. — М.: Юрайт, 2026. — 278 с. — URL: https://ozon.urait.ru/bcode/589671</li>
+        <li>Маслова В.М. Управление персоналом: учебник и практикум для вузов. — 5-е изд., перераб. и доп. — М.: Юрайт, 2025. — 451 с. — URL: https://urait.ru/bcode/559725</li>
+        <li>Пугачев В.П. Управление персоналом организации: практический курс: учебник для СПО. — 2-е изд., испр. и доп. — М.: Юрайт, 2026. — 284 с. — URL: https://ozon.urait.ru/bcode/589742</li>
+        <li>Трудовой кодекс Российской Федерации от 30.12.2001 № 197-ФЗ (ред. от 2023).</li>
+        <li>Профессиональный стандарт «Специалист по управлению персоналом» (утв. приказом Минтруда России от 09.03.2022 № 109н).</li>
+        <li>HR-Portal: профессиональный портал HR-специалистов. — URL: https://hr-portal.ru</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <p style="margin-bottom: 12px; font-family: 'Montserrat', sans-serif; font-size: 15px;">Тема: <b>Кадровая служба организации: задачи, функции кадровой службы, характеристика профессионального состава кадровых служб</b></p>
+  <p>Автор: <b>Кузнецова Дарья Михайловна</b>, группа М-31</p>
+</footer>
+
+<script>
+  /* ===== ACCORDION ===== */
+  document.querySelectorAll('.acc-header').forEach(header=>{
+    header.addEventListener('click',()=>{
+      const item=header.parentElement;
+      const body=item.querySelector('.acc-body');
+      const isActive=item.classList.contains('active');
+      document.querySelectorAll('.acc-item').forEach(i=>{
+        i.classList.remove('active');
+        i.querySelector('.acc-body').style.maxHeight=null;
+      });
+      if(!isActive){
+        item.classList.add('active');
+        body.style.maxHeight=body.scrollHeight+'px';
+      }
+    });
+  });
+
+  /* ===== QUIZ ===== */
+  const quizData=[
+    {
+      q:"Какая задача НЕ относится к кадровой службе?",
+      options:["Подбор персонала","Разработка производственного оборудования","Обучение сотрудников","Кадровое делопроизводство"],
+      correct:1
+    },
+    {
+      q:"Что такое качественная потребность в персонале?",
+      options:["Число сотрудников","Потребность в кадрах по специальностям и профессиям","Размер зарплаты","Количество вакансий"],
+      correct:1
+    },
+    {
+      q:"Кто отвечает за стратегию управления персоналом?",
+      options:["Рекрутер","HR-директор","Кадровый делопроизводитель","Бухгалтер"],
+      correct:1
+    },
+    {
+      q:"Какой метод оценки даёт многостороннюю обратную связь?",
+      options:["KPI","Аттестация","360°","Assessment center"],
+      correct:2
+    },
+    {
+      q:"Что такое профстандарт?",
+      options:["Документ с требованиями к квалификации специалиста","Штатное расписание","Трудовой договор","График отпусков"],
+      correct:0
+    }
+  ];
+
+  const quizContainer=document.getElementById('quiz-questions');
+  quizData.forEach((item,qi)=>{
+    const qDiv=document.createElement('div');
+    qDiv.className='quiz-q';
+    let optsHtml='';
+    item.options.forEach((opt,oi)=>{
+      optsHtml+=`<div class="quiz-option" data-q="${qi}" data-o="${oi}" onclick="selectOption(this)"><span class="marker">${String.fromCharCode(65+oi)}</span>${opt}</div>`;
+    });
+    qDiv.innerHTML=`<div class="q-text">${qi+1}. ${item.q}</div>${optsHtml}`;
+    quizContainer.appendChild(qDiv);
+  });
+
+  function selectOption(el){
+    const q=el.dataset.q;
+    document.querySelectorAll(`.quiz-option[data-q="${q}"]`).forEach(o=>o.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+
+  function checkQuiz(){
+    let score=0;
+    quizData.forEach((item,qi)=>{
+      const selected=document.querySelector(`.quiz-option[data-q="${qi}"].selected`);
+      if(!selected) return;
+      const oi=parseInt(selected.dataset.o);
+      document.querySelectorAll(`.quiz-option[data-q="${qi}"]`).forEach(o=>o.classList.remove('correct','wrong'));
+      if(oi===item.correct){
+        selected.classList.add('correct');
+        score++;
+      }else{
+        selected.classList.add('wrong');
+        document.querySelector(`.quiz-option[data-q="${qi}"][data-o="${item.correct}"]`).classList.add('correct');
+      }
+    });
+    const result=document.getElementById('quiz-result');
+    result.classList.add('show');
+    const percent=Math.round(score/quizData.length*100);
+    let msg='';
+    if(percent===100) msg='Отлично! Ты отлично разбираешься в теме 🎉';
+    else if(percent>=60) msg='Хороший результат! Есть куда расти 👍';
+    else msg='Стоит повторить материал — вернись к разделам выше 📚';
+    result.innerHTML=`Правильных ответов: <strong>${score} из ${quizData.length}</strong> (${percent}%)<br><span style="font-size:15px;font-weight:400;opacity:.9;">${msg}</span>`;
+  }
+
+  /* ===== CHECKLIST ===== */
+  document.querySelectorAll('.check-item').forEach(item=>{
+    item.addEventListener('click',()=>{
+      item.classList.toggle('checked');
+      const box=item.querySelector('.check-box');
+      box.textContent=item.classList.contains('checked')?'✓':'';
+    });
+  });
+
+  /* ===== SCROLL REVEAL ===== */
+  const revealObserver=new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  },{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));
+</script>
+</body>
+</html>
